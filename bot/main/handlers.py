@@ -28,15 +28,15 @@ def error(update: Update, context: CallbackContext):
 
 def request_handler(update: Update, context: CallbackContext):
     if not (update.message.audio or update.message.voice):
-        raise Exception("Ovozli habar yuboring")
+        raise Exception("Iltimos ovozli habar yuboring")
+    update.message.reply_text("Iltimos kutib turing...")
     try:
         if update.message.audio:
-            update.message.reply_text("Iltimos kutib turing")
             transcript = svc.get_text_from(URL, update.message.audio)
             update.message.reply_text(f'Natija:\n"{transcript}"')
         else:
-            update.message.reply_text("Iltimos kutib turing")
             transcript = svc.get_text_from(URL, update.message.voice)
             update.message.reply_text(f'Natija:\n"{transcript}"')
     except BaseException:
         raise Exception("Tizimda hatolik yuz berdi. Birozdan so'ng harakat qilib ko'ring")
+
